@@ -1,0 +1,17 @@
+[package]
+name = "amia-conference"
+version = "0.1.0"
+entrypoint = "lib.typ"
+authors = ["Huan He <@hehuan2112>"]
+license = "MIT-0"
+description = "Conference paper for the AMIA Annual Symposium."
+repository = "https://github.com/hehuan2112/amia-typst-template"
+keywords = ["AMIA", "American Medical Informatics Association", "biomedical informatics", "conference paper"]
+categories = ["paper"]
+disciplines = ["medicine"]
+compiler = "0.15.0"
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+thumbnail = "thumbnail.png"
