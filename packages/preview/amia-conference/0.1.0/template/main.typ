@@ -1,7 +1,7 @@
 #import "@preview/amia-conference:0.1.0": amia-symposium
 
 #show: amia-symposium.with(
-  title: "Title of Your Submission",
+  title: "A Descriptive Title for Your AMIA Annual Symposium Submission That Demonstrates Multi-Line Title Wrapping",
   authors: (
     ("Firstname A. Lastname, Degrees", (1,)),
     ("Firstname B. Lastname, Degrees", (2,)),
