@@ -28,11 +28,14 @@ and presentation requirements.
 = Another Major Heading and References
 
 This paragraph demonstrates citations#cite(<pryor1983help>)#cite(<gardner1990blood>),
-figure references, and a compact table. Place each figure or table as close as
-possible to its first mention, and keep each individual visual on one page.
+references to @fig-example and @tab-submission-types, and a numbered equation.
+Place each figure or table as close as possible to its first mention, and keep
+each individual visual on one page.
 
 #figure(
   placement: none,
+  // To load a local figure, replace this `rect(...)` placeholder with
+  // `image("fig1.png", width: 100%)`.
   rect(
     width: 100%,
     height: 0.75in,
@@ -46,6 +49,10 @@ possible to its first mention, and keep each individual visual on one page.
   ),
   caption: [Example figure placeholder.],
 ) <fig-example>
+
+The F1 score in @eq-f1 is a common example of a numbered, referenceable equation:
+
+$ F_1 = 2 dot (P dot R) / (P + R) $ <eq-f1>
 
 @tab-submission-types shows a compact subset of the submission guidance.
 Always verify the current Call for Participation before submission.
