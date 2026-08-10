@@ -1,7 +1,7 @@
 #import "@preview/amia-conference:0.1.0": amia-symposium
 
 #show: amia-symposium.with(
-  title: "A Descriptive Title for Your AMIA Annual Symposium Submission That Demonstrates Multi-Line Title Wrapping",
+  title: "A Practical Template for AMIA Annual Symposium and Amplify Informatics Conference Submissions",
   authors: (
     ("Firstname A. Lastname, Degrees", (1,)),
     ("Firstname B. Lastname, Degrees", (2,)),
@@ -20,17 +20,24 @@
 
 = Introduction
 
-Use this document as a starting point for an AMIA submission. Review the AMIA
-Call for Participation and the submission site, where the requirements for each
-submission type are listed. All submissions must conform to the current format
-and presentation requirements.
+Use this document as a starting point for an AMIA submission.
+
+= Methods
+
+== Subheader 1
+
+Review the AMIA Call for Participation and the submission site for the current
+requirements for each submission type.
+
+=== Sub Subheader
+
+Place each figure or table as close as possible to its first mention, and keep
+each individual visual on one page.
 
 = Another Major Heading and References
 
 This paragraph demonstrates citations#cite(<pryor1983help>)#cite(<gardner1990blood>),
 references to @fig-example and @tab-submission-types, and a numbered equation.
-Place each figure or table as close as possible to its first mention, and keep
-each individual visual on one page.
 
 #figure(
   placement: none,
