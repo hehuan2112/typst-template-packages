@@ -1,6 +1,8 @@
-// AMIA Annual Symposium paper style.
+// AMIA conference paper style.
 
 // Applies page, text, heading, caption, equation, and bibliography defaults.
+// This must be applied from the document body via `#show: amia-symposium.with(...)`:
+// document-wide rules in an imported Typst module do not propagate on their own.
 #let template-styles(body) = {
   set page(
     paper: "us-letter",
@@ -18,57 +20,71 @@
   show heading.where(level: 3): set text(size: 10pt, weight: "regular", style: "italic")
   show heading.where(level: 3): set block(above: 1em, below: 0.6em)
 
+  set figure(placement: top)
   set figure.caption(separator: [. ])
   show figure.caption: set text(size: 9pt)
   show figure.caption: set par(leading: 0.5em, spacing: 0pt)
-  show figure.caption: caption => context [
-    #strong[#caption.supplement #caption.counter.display(caption.numbering)#caption.separator]#caption.body
+  show figure.caption: it => context [
+    #strong[#it.supplement #it.counter.display(it.numbering)#it.separator]#it.body
   ]
+
   set table(stroke: 0.5pt + black, inset: (x: 6pt, y: 3pt))
   set math.equation(numbering: "(1)")
+
   set bibliography(title: none)
   show bibliography: set text(size: 9pt)
   show bibliography: set par(first-line-indent: 0pt, leading: 0.5em, spacing: 0.5em)
   body
 }
 
-#let title-block(title-text, authors, affiliations) = {
+// `author-breaks` contains the 1-based author positions after which to insert
+// a hard line break. This keeps long author lists readable without changing
+// affiliation numbering.
+#let title-block(title-text, authors, affiliations, author-breaks: ()) = {
   set align(center)
+  set par(justify: false, leading: 0.5em)
+
   set text(size: 14pt, weight: "bold")
   title-text
-  v(2pt)
+  v(0pt)
 
   set text(size: 12pt, weight: "bold")
   let author-entries = authors.map(((name, institution-indexes)) => {
     let superscripts = institution-indexes.map(index => super(str(index)))
     [#name#superscripts.join(super(","))]
   })
-  author-entries.join(", ")
+  for (index, entry) in author-entries.enumerate() {
+    entry
+    if index < author-entries.len() - 1 {
+      if author-breaks.contains(index + 1) {
+        linebreak()
+      } else {
+        [, ]
+      }
+    }
+  }
   v(0pt)
 
-  set text(size: 10pt, weight: "bold")
+  set text(size: 11pt, weight: "bold")
   let affiliation-entries = affiliations.enumerate().map(((index, affiliation)) => {
     [#super(str(index + 1)) #affiliation]
   })
   affiliation-entries.join(linebreak())
-  v(8pt)
+  v(0pt)
 }
 
 #let abstract-block(body) = {
   set align(left)
-  set text(size: 10pt, weight: "bold")
-  [Abstract]
-  linebreak()
-  set text(size: 10pt, style: "italic")
-  body
+  {
+    set text(size: 10pt, weight: "bold")
+    [Abstract]
+    linebreak()
+  }
+  {
+    set text(size: 10pt, style: "italic")
+    body
+  }
   v(6pt)
-}
-
-#let keywords-block(words) = {
-  set align(left)
-  set text(size: 10pt)
-  [*Keywords:* #words.join("; ")]
-  v(8pt)
 }
 
 #let references-heading() = {
@@ -82,16 +98,17 @@
 #let amia-symposium(
   title: "Title",
   authors: (),
+  author-breaks: (),
   affiliations: (),
-  abstract: [],
-  keywords: (),
+  abstract: none,
   bib: none,
   body,
 ) = {
   show: template-styles
-  title-block(title, authors, affiliations)
-  abstract-block(abstract)
-  keywords-block(keywords)
+  title-block(title, authors, affiliations, author-breaks: author-breaks)
+  if abstract != none {
+    abstract-block(abstract)
+  }
   body
   if bib != none {
     references-heading()

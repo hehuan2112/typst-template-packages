@@ -22,9 +22,10 @@ Alternatively, import the package into an existing document:
 #show: amia-symposium.with(
   title: "Your Paper Title",
   authors: (("Author One, Degree", (1,)),),
+  // Optional: break a long author list after these 1-based positions.
+  author-breaks: (),
   affiliations: ("Department, Institution, City, State",),
   abstract: [Your abstract.],
-  keywords: ("Biomedical Informatics",),
   bib: bibliography("refs.bib", style: "american-medical-association"),
 )
 
@@ -32,6 +33,10 @@ Alternatively, import the package into an existing document:
 
 Start writing your paper.
 ```
+
+Set `abstract: none` when the submission system collects the abstract
+separately. For long author lists, use `author-breaks`, for example `(3,)`, to
+start a new line after the third author.
 
 The template uses the system-installed Times New Roman font. Install that font
 locally, or select a compatible substitute if it is unavailable in your Typst
